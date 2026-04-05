@@ -102,6 +102,12 @@
     title: objective-condition-maroon-person-title
   - type: PickRandomPerson
     filters:
+    # Start of Box Change
+    - !type:BodyMindFilter
+      whitelist:
+        components:
+        - ConsentBeRRTarget
+    # End of Box Change
     # Can't have multiple objectives to kill the same person.
     - !type:TargetObjectiveMindFilter
       blacklist:
@@ -128,6 +134,7 @@
       whitelist:
         components:
         - CommandStaff
+        - ConsentBeRRTarget # Box Change
     # Can't have multiple objectives to kill the same person.
     - !type:TargetObjectiveMindFilter
       blacklist:

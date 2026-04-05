@@ -84,3 +84,7 @@
   setPreference: true
   visiblePreference: true
   objective: consent-be-rr-target-desc
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - ConsentBeRRTarget
