@@ -25,4 +25,16 @@ public sealed partial class BloodDeficiencyComponent : Component
     /// </summary>
     [DataField("bloodReferenceFactor"), ViewVariables(VVAccess.ReadWrite)]
     public float BloodReferenceFactor = 1f;
+
+    /// <summary>
+    /// A field to define if we should display WarningMessage on health analysers/PDAs
+    /// </summary>
+    [DataField]
+    public bool Analyzable = true;
+
+    /// <summary>
+    /// The message that will appear when scanned by a health analyzer or PDA with the Medtek program
+    /// </summary>
+    [DataField]
+    public LocId WarningMessage = "health-analyzer-window-entity-blood-deficiency-text";
 }

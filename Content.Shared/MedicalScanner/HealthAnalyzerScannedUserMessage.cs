@@ -14,8 +14,12 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
     public bool? ScanMode;
     public bool? Bleeding;
     public bool? Unrevivable;
+    public bool? BloodDeficiency; // Box Change, adds blood deficiency
 
-    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable)
+    // Box Change Start, have HealthAnalyzerScannedUserMessage also include blood deficiency
+    // public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable)
+    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, bool? bloodDeficiency)
+    // End Box Change
     {
         TargetEntity = targetEntity;
         Temperature = temperature;
@@ -23,6 +27,7 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
         ScanMode = scanMode;
         Bleeding = bleeding;
         Unrevivable = unrevivable;
+        BloodDeficiency = bloodDeficiency; // Box Change, adds blood deficiency to list
     }
 }
 

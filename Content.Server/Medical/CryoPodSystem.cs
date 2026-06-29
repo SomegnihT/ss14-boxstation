@@ -59,7 +59,11 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
                 : 0,
             null,
             null,
+            // Box Change Start, adds null value for blood deficiency
+            // null
+            null,
             null
+            // Box Change End
         ));
     }
 

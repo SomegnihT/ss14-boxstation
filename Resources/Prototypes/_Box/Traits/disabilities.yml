@@ -10,7 +10,7 @@
     - type: BloodDeficiency
       bloodRefreshAmount: 0.08
       bloodReferenceFactor: 0
-      
+
 - type: trait
   id: BloodDeficiencyMinor
   name: trait-blood-deficiency-minor-name
@@ -21,3 +21,4 @@
     - type: BloodDeficiency
       bloodRefreshAmount: 0
       bloodReferenceFactor: 1
+      warningMessage: health-analyzer-window-entity-minor-blood-deficiency-text

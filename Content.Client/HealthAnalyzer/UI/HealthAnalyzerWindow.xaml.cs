@@ -19,9 +19,10 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-// Box Change Start for IPCs to display unquie Unrevivable text
+// Box Change Start for IPCs to display unquie Unrevivable text & Blood Deficiency text
 using Content.Shared._EE.Silicon.Components;
 using Content.Shared._Box.Silicons;
+using Content.Shared._Box.Traits.Assorted;
 // Box Change End
 
 namespace Content.Client.HealthAnalyzer.UI
@@ -108,13 +109,27 @@ namespace Content.Client.HealthAnalyzer.UI
 
             // Alerts
 
-            var showAlerts = msg.Unrevivable == true || msg.Bleeding == true;
+            // Box Change Start, add check for blood deficiency
+            // var showAlerts = msg.Unrevivable == true || msg.Bleeding == true;
+            var showAlerts = msg.Unrevivable == true || msg.Bleeding == true || msg.BloodDeficiency == true;
+            // End Box Change
 
             AlertsDivider.Visible = showAlerts;
             AlertsContainer.Visible = showAlerts;
 
             if (showAlerts)
                 AlertsContainer.RemoveAllChildren();
+
+            // Start Box Change to show a warning for blood deficiency traits
+            _entityManager.TryGetComponent<BloodDeficiencyComponent>(target, out var bloodDeficiency);
+            if (msg.BloodDeficiency == true)
+                AlertsContainer.AddChild(new RichTextLabel
+                {
+                    Text = Loc.GetString(bloodDeficiency!.WarningMessage),
+                    Margin = new Thickness(0, 4),
+                    MaxWidth = 300
+                });
+            // End Box Change
 
             // Start Box Change to give IPCs unique medical scanner text for unrevivable
             // if (msg.Unrevivable == true)

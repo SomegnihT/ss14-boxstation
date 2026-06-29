@@ -19,6 +19,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Content.Server.Body.Systems;
+using Content.Shared._Box.Traits.Assorted; // Box Change, done so Blood Deficiency traits can be checked for
 
 namespace Content.Server.Medical;
 
@@ -201,6 +202,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         var bloodAmount = float.NaN;
         var bleeding = false;
         var unrevivable = false;
+        var bloodDeficiency = false; // Box Change, adds blood deficiency
 
         if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
             _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
@@ -213,13 +215,22 @@ public sealed class HealthAnalyzerSystem : EntitySystem
         if (TryComp<UnrevivableComponent>(target, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
 
+        // Box Change Start, check for blood deficiency trait
+        if (TryComp<BloodDeficiencyComponent>(target, out var bloodDeficiencyComp) && bloodDeficiencyComp.Analyzable)
+            bloodDeficiency = true;
+        // Box Change End
+
         _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(
             GetNetEntity(target),
             bodyTemperature,
             bloodAmount,
             scanMode,
             bleeding,
-            unrevivable
+            // Start Box Change, adds blood deficiency
+            // unrevivable
+            unrevivable,
+            bloodDeficiency
+            // End Box Change
         ));
     }
 }
